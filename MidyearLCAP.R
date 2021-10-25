@@ -3,6 +3,8 @@
 library(tidyverse)
 library(readxl)
 library(here)
+library(googlesheets4)
+
 
 exported.file <- "211024_Graves ESD_21 LCAP MRR Data.xlsx"
 
@@ -10,15 +12,12 @@ ets.file <- read_xlsx(here("data",exported.file))
 
 data <- ets.file %>%
     mutate(descrip2 =  str_remove(Description,"21-22 LCAP: Goal 1 - Measuring/Reporting - " )) %>%
-    separate(descrip2, sep = " - ", into = c("Number", "Type"))
-
-
-data2 <- data %>% 
+    separate(descrip2, sep = " - ", into = c("Number", "Type")) %>% 
     select(-Description,-SectionPosition) %>%
     pivot_wider(names_from = Type, values_from = FieldData)
 
 
-data3 <- data2 %>%
+advice <- data %>%
     mutate(`MidYear Advice` = case_when(str_detect(str_to_lower(Metric), " 1 a| 1a") ~ "Likely can report" ,
                                         str_detect(str_to_lower(Metric), "fully credentialed") ~ "Likely can report", 
                                         str_detect(str_to_lower(Metric), " 1 b| 1b") ~ "Likely can report" ,
@@ -82,3 +81,16 @@ data3 <- data2 %>%
            )
            
            )
+
+
+ss <- "https://docs.google.com/spreadsheets/d/1WjFBvLxwhfbmJdCattvM3hd-Hak71N2EEd6pzIBmK3M/edit#gid=1341274390"
+
+leas <- unique(advice$`District Name`)
+
+for (i in leas) {
+ 
+    write_sheet(advice, ss, sheet = i)
+ 
+}
+
+
