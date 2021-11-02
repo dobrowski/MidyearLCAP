@@ -6,7 +6,7 @@ library(here)
 library(googlesheets4)
 
 
-exported.file <- "211029_Monterey COE_MRR Summary.xlsx"
+exported.file <- "211102_Monterey COE_MRR Summary.xlsx"
 
 ets.file <- read_xlsx(here("data",exported.file))
 
@@ -35,8 +35,8 @@ advice <- data %>%
                                         str_detect(str_to_lower(Metric), " participat") ~ "Likely can report" ,
                                         str_detect(str_to_lower(Metric), " 3 c| 3c") ~ "Likely can report" ,
                                         str_detect(str_to_lower(Metric), " participat") ~ "Likely can report" ,
-                                        str_detect(str_to_lower(Metric), " 4 a| 4a") ~ "Cannot report" ,
-                                        str_detect(str_to_lower(Metric), "caaspp|sbac") ~ "Cannot report" ,
+                                        str_detect(str_to_lower(Metric), " 4 a| 4a") ~ "Cannot report, consider interim assessments" ,
+                                        str_detect(str_to_lower(Metric), "caaspp|sbac|statewide ass") ~ "Cannot report, consider interim assessments" ,
                                         str_detect(str_to_lower(Metric), " 4 b| 4b") ~ "Cannot report" ,
                                         str_detect(str_to_lower(Metric), "elpac") ~ "Cannot report" ,
                                         str_detect(str_to_lower(Metric), " 4 c| 4c") ~ "Cannot report" ,
@@ -52,7 +52,7 @@ advice <- data %>%
                                         str_detect(str_to_lower(Metric), " 5 a| 5a") ~ "Likely can report" ,
                                         str_detect(str_to_lower(Metric), "attendance") ~ "Likely can report" ,
                                         str_detect(str_to_lower(Metric), " 5 b| 5b") ~ "Likely can report" ,
-                                        str_detect(str_to_lower(Metric), "chronic absenteeism") ~ "Likely can report" ,
+                                        str_detect(str_to_lower(Metric), "chronic absent") ~ "Likely can report" ,
                                         str_detect(str_to_lower(Metric), " 5 c| 5c") ~ "Likely can report" ,
                                         str_detect(str_to_lower(Metric), "middle school drop|dropout|drop out") ~ "Likely can report" ,
                                       str_detect(str_to_lower(Metric), " 5 d| 5d") ~ "Likely can report" ,
@@ -93,7 +93,7 @@ advice <- data %>%
                                      str_detect(str_to_lower(Metric), " 3 c| 3c") ~ "Locally determined, possibly sign-in sheets" ,
                                      str_detect(str_to_lower(Metric), " participat") ~ "Locally determined, possibly sign-in sheets" ,
                                      str_detect(str_to_lower(Metric), " 4 a| 4a") ~ "CAASPP End of Year testing - CERS or CAASPP-ELPAC.org" ,
-                                     str_detect(str_to_lower(Metric), "caaspp|sbac") ~ "CAASPP End of Year testing - CERS or CAASPP-ELPAC.org" ,
+                                     str_detect(str_to_lower(Metric), "caaspp|sbac|statewide ass") ~ "CAASPP End of Year testing - CERS or CAASPP-ELPAC.org" ,
                                      str_detect(str_to_lower(Metric), " 4 b| 4b") ~ "ELPAC End of Year testing - CERS or CAASPP-ELPAC.org" ,
                                      str_detect(str_to_lower(Metric), "elpac") ~ "ELPAC End of Year testing - CERS or CAASPP-ELPAC.org" ,
                                      str_detect(str_to_lower(Metric), " 4 c| 4c") ~ "CERS, CAASPP_ELPAC.org or perhaps College Board" ,
@@ -109,7 +109,7 @@ advice <- data %>%
                                       str_detect(str_to_lower(Metric), " 5 a| 5a") ~ "SIS" ,
                                      str_detect(str_to_lower(Metric), "attendance") ~ "SIS" ,
                                      str_detect(str_to_lower(Metric), " 5 b| 5b") ~ "SIS and Dashboard reports" ,
-                                     str_detect(str_to_lower(Metric), "chronic absenteeism") ~ "SIS and Dashboard reports" ,
+                                     str_detect(str_to_lower(Metric), "chronic absent") ~ "SIS and Dashboard reports" ,
                                      str_detect(str_to_lower(Metric), " 5 c| 5c") ~ "SIS" ,
                                      str_detect(str_to_lower(Metric), "middle school drop|dropout|drop out") ~ "SIS" ,
                                      str_detect(str_to_lower(Metric), " 5 d| 5d") ~ "SIS" ,
