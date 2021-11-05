@@ -150,7 +150,7 @@ sises <- tribble(
     #  "Big Sur Unified School District"            ,"",           
     #  "Bradley Elementary School"                    ,"",         
     #  "Buena Vista Middle School"                      ,"",       
-    #  "Carmel Unified School District"                   ,"",     
+      "Carmel Unified School District"                   ,"Aeries",     
     #  "Chualar Union Elementary School District"           ,"",   
     # "Gonzales Unified School District"                      ,"",
     #  "Graves Elementary School"                 ,"",             
@@ -178,7 +178,7 @@ sises <- tribble(
 
 ss <- "https://docs.google.com/spreadsheets/d/1WjFBvLxwhfbmJdCattvM3hd-Hak71N2EEd6pzIBmK3M/edit#gid=1341274390"
 
-leas <- unique(advice$`District Name`)[25]                                  
+leas <- unique(advice$`District Name`)                                 
 
 for (i in leas) {
  
